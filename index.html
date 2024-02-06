@@ -1,0 +1,54 @@
+<script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
+<script>
+  /* global nn */
+
+  let cd 
+  
+  function createCD(size, x, y) {
+    const img = nn.create('img')
+      .set({
+        src: 'cd.gif',
+        alt: 'this is a cd'
+      })
+
+
+      .css({
+        'width': `${size}px`,
+        'position': 'absolute',
+        'left': `${x - size / 2}px`,
+        'top': `${y - size / 2 }px`
+      })
+      .addTo('body')
+  }
+
+// function setup() { 
+//   const size = 100 
+//   const x = nn.width /2 
+//   const y = nn.height / 2
+//   cd = createCD(size, x, y)
+// }
+//   function draw () { 
+//   requestAnimationFrame(draw)
+//   const x = Math.random() * 100 
+//   const y = Math.random() * 100
+//   cd.css({left : `${x}px`, top:`${y}px` }) 
+//   }
+  
+  function setup() {
+    for (let i = 0; i < 25; i++) {
+      const size = 50
+      const scale = 0.25
+      const radius = 200
+      const cx = nn.width / 2
+      const cy = nn.height / 2
+
+      const x = cx + Math.cos(i * scale) * radius
+      const y = cy + Math.sin(i * scale) * radius
+
+      cd = createCD(size, x, y)
+    }
+  }
+
+  nn.on('load', setup)
+  nn.on('load', draw)
+</script>
